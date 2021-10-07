@@ -4,7 +4,7 @@ from .models import Sport
 class SportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sport
-        fields = ['name']
+        fields = ['id', 'name']
 
         def create(self, validated_data):
             return Sport.objects.create(**validated_data)

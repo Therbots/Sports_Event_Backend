@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'cars.apps.CarsConfig',
     'sports.apps.SportsConfig',
-    'athletes.apps.AthletesConfig',
+    'locations.apps.LocationsConfig',
 ]
 
 MIDDLEWARE = [
