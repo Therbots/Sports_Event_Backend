@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'cars.apps.CarsConfig',
+    'sports.apps.SportsConfig',
+    'athletes.apps.AthletesConfig',
 ]
 
 MIDDLEWARE = [
