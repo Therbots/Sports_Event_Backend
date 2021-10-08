@@ -1,8 +1,10 @@
 from django.db import models
 from sports.models import Sport
+from django.contrib.auth.models import User
 
 
 class Sports_event(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
     location = models.CharField(max_length=200)

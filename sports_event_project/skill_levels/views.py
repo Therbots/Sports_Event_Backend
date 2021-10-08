@@ -7,21 +7,35 @@ from .models import Skill_level
 from .serializers import Skill_levelSerializer
 from django.contrib.auth.models import User
 
-class Skill_levelList(APIView):
+# class Skill_levelList(APIView):
 
-    permission_classes = [IsAuthenticated]
+#     permission_classes = [IsAuthenticated]
 
-    def get(self,request):
-        skill_levels = Skill_level.objects.all()
-        serializer = Skill_levelSerializer(skill_levels, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         skill_levels = Skill_level.objects.all()
+#         serializer = Skill_levelSerializer(skill_levels, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
+#     def post(self, request):
+#         serializer = Skill_levelSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST', 'GET'])
+@permission_classes([IsAuthenticated])
+def user_skill_level(request):
+    if request.method == 'POST':
         serializer = Skill_levelSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    elif request.method == 'GET':
+        skill_levels = Skill_level.objects.filter(user_id=request.user.id)
+        serializer = Skill_levelSerializer(skill_levels, many=True)
+        return Response(serializer.data)
 
 # Create your views here.
