@@ -29,5 +29,6 @@ urlpatterns = [
     path('api/sports_events/', include('sports_events.urls')),
     path('api/attending_athletes/', include('attending_athletes.urls')),
     path('api/event_message_boards/', include('event_message_boards.urls')),
+    path('api/comments/', include('comments.urls')),
 
 ]

@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'sports_events.apps.SportsEventsConfig',
     'attending_athletes.apps.AttendingAthletesConfig',
     'event_message_boards.apps.EventMessageBoardsConfig',
+    'comments.apps.CommentsConfig',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
