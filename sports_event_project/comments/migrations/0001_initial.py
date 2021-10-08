@@ -11,17 +11,15 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('event_message_boards', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name='Comment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street', models.CharField(max_length=150)),
-                ('city', models.CharField(max_length=150)),
-                ('state', models.CharField(max_length=100)),
-                ('zipcode', models.IntegerField()),
+                ('event_message_board', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='event_message_boards.event_message_board')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

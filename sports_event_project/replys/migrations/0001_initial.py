@@ -11,17 +11,15 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('comments', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name='Reply',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street', models.CharField(max_length=150)),
-                ('city', models.CharField(max_length=150)),
-                ('state', models.CharField(max_length=100)),
-                ('zipcode', models.IntegerField()),
+                ('comment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='comments.comment')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

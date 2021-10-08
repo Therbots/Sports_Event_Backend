@@ -10,18 +10,16 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('sports_events', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name='Attending_athlete',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street', models.CharField(max_length=150)),
-                ('city', models.CharField(max_length=150)),
-                ('state', models.CharField(max_length=100)),
-                ('zipcode', models.IntegerField()),
+                ('sports_event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sports_events.sports_event')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
