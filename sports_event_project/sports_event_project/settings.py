@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'attending_athletes.apps.AttendingAthletesConfig',
     'event_message_boards.apps.EventMessageBoardsConfig',
     'comments.apps.CommentsConfig',
+    'replys.apps.ReplysConfig',
 ]
 
 

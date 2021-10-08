@@ -12,8 +12,8 @@ class Sports_eventList(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-        sports = Sports_event.objects.all()
-        serializer = Sports_eventSerializer(sports, many=True)
+        sports_events = Sports_event.objects.all()
+        serializer = Sports_eventSerializer(sports_events, many=True)
         return Response(serializer.data)
 
     def post(self, request):

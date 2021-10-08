@@ -12,8 +12,8 @@ class LocationList(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-        sports = Location.objects.all()
-        serializer = LocationSerializer(sports, many=True)
+        locations = Location.objects.all()
+        serializer = LocationSerializer(locations, many=True)
         return Response(serializer.data)
 
     def post(self, request):

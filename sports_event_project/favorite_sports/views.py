@@ -12,8 +12,8 @@ class Favorite_sportList(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-        sports = Favorite_sport.objects.all()
-        serializer = Favorite_sportSerializer(sports, many=True)
+        favorite_sports = Favorite_sport.objects.all()
+        serializer = Favorite_sportSerializer(favorite_sports, many=True)
         return Response(serializer.data)
 
     def post(self, request):

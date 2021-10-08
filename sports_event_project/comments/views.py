@@ -12,8 +12,8 @@ class CommentList(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-        sports = Comment.objects.all()
-        serializer = CommentSerializer(sports, many=True)
+        comments = Comment.objects.all()
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
     def post(self, request):

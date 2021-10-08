@@ -12,8 +12,8 @@ class Attending_athleteList(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-        sports = Attending_athlete.objects.all()
-        serializer = Attending_athleteSerializer(sports, many=True)
+        attending_athletes = Attending_athlete.objects.all()
+        serializer = Attending_athleteSerializer(attending_athletes, many=True)
         return Response(serializer.data)
 
     def post(self, request):
