@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'sports.apps.SportsConfig',
     'locations.apps.LocationsConfig',
     'competitiveness_levels.apps.CompetitivenessLevelsConfig'
+    'skill_levels.apps.SkillLevelsConfig',
 ]
 
 MIDDLEWARE = [
