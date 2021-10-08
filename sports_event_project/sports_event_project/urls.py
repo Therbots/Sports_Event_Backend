@@ -26,5 +26,7 @@ urlpatterns = [
     path('api/competitiveness_levels/', include('competitiveness_levels.urls')),
     path('api/skill_levels/', include('skill_levels.urls')),
     path('api/favorite_sports/', include('favorite_sports.urls')),
+    path('api/sports_events/', include('sports_events.urls')),
+    path('api/attending_athletes/', include('attending_athletes.urls')),
 
 ]
