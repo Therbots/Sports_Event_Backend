@@ -7,20 +7,32 @@ from .models import Location
 from .serializers import LocationSerializer
 from django.contrib.auth.models import User
 
-class LocationList(APIView):
+# class LocationList(APIView):
 
-    permission_classes = [IsAuthenticated]
+#     permission_classes = [IsAuthenticated]
 
-    def get(self,request):
-        locations = Location.objects.all()
-        serializer = LocationSerializer(locations, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         locations = Location.objects.all()
+#         serializer = LocationSerializer(locations, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
+#     def post(self, request):
+#         serializer = LocationSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST', 'GET'])
+@permission_classes([IsAuthenticated])
+def user_location(request):
+    if request.method == 'POST':
         serializer = LocationSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+    elif request.method == 'GET':
+        cars = Location.objects.filter(user_id=request.user.id)
+        serializer = LocationSerializer(cars, many=True)
+        return Response(serializer.data)
