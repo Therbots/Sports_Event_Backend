@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'skill_levels.apps.SkillLevelsConfig',
     'favorite_sports.apps.FavoriteSportsConfig',
     'sports_events.apps.SportsEventsConfig',
-    'attehding_athletes.apps.AttendingAthletesConfig',
+    'attending_athletes.apps.AttendingAthletesConfig',
+    'event_message_boards.apps.EventMessageBoardsConfig',
 ]
 
 MIDDLEWARE = [
