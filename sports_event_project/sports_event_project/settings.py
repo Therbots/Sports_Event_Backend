@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'cars.apps.CarsConfig',
     'sports.apps.SportsConfig',
-    'locations.apps.LocationsConfig',
+    'profiles.apps.ProfilesConfig',
     'competitiveness_levels.apps.CompetitivenessLevelsConfig',
     'skill_levels.apps.SkillLevelsConfig',
     'favorite_sports.apps.FavoriteSportsConfig',

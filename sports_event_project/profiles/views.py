@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
-from .models import Location
-from .serializers import LocationSerializer
+from .models import Profile
+from .serializers import ProfileSerializer
 from django.contrib.auth.models import User
 
 # class LocationList(APIView):
@@ -25,14 +25,14 @@ from django.contrib.auth.models import User
 
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
-def user_location(request):
+def user_profile(request):
     if request.method == 'POST':
-        serializer = LocationSerializer(data=request.data)
+        serializer = ProfileSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        cars = Location.objects.filter(user_id=request.user.id)
-        serializer = LocationSerializer(cars, many=True)
+        profiles = Profile.objects.filter(user_id=request.user.id)
+        serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
