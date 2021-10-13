@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 def upload_path(instance, filename):
-    return '/'.join(['image', str(instance.name), filename])
+    return '/'.join(['images', str(instance.name), filename])
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -11,6 +11,6 @@ class Profile(models.Model):
     street = models.CharField(max_length=150)
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=100)
-    zipcode = models.IntegerField()
+    zipcode = models.CharField(max_length=100)
 
 # Create your models here.
