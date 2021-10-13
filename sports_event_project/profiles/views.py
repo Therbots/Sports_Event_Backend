@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Profile
 from .serializers import ProfileSerializer
 from django.contrib.auth.models import User
+import requests
 
 # class LocationList(APIView):
 
@@ -28,8 +29,16 @@ from django.contrib.auth.models import User
 def user_profile(request):
     if request.method == 'POST':
         serializer = ProfileSerializer(data=request.data)
+        street = request.data["street"]
+        city = request.data["city"]
+        state = request.data["city"]
+        response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={street}{city}{state}&key=AIzaSyDxnPufIqzt-rlQ_chGZS38eYFrCAw8HNE')
+        object = response.json()
+        geo_location = object['results'][0]['geometry']
+        lat = geo_location['location']['lat']
+        lng = geo_location['location']['lng']
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save(user=request.user, lat=lat, lng=lng)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':

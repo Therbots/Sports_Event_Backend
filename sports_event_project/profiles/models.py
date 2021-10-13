@@ -12,5 +12,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=100)
+    lat = models.IntegerField(blank=True, null=True)
+    lng = models.IntegerField(blank=True, null=True)
 
 # Create your models here.
