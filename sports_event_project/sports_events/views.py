@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Sports_event
 from .serializers import Sports_eventSerializer
 from django.contrib.auth.models import User
+import requests
 
 # class Sports_eventList(APIView):
 
@@ -35,8 +36,17 @@ def get_all_events(request):
 def user_sports_events(request):
     if request.method == 'POST':
         serializer = Sports_eventSerializer(data=request.data)
+        print(request.data["location"])
+        address = request.data["location"]
+        response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyDxnPufIqzt-rlQ_chGZS38eYFrCAw8HNE')
+        print(response.json())
+        object = response.json()
+        geo_location = object['results'][0]['geometry']
+        lat = geo_location['location']['lat']
+        lng = geo_location['location']['lng']
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            # print(serializer.data['location'])
+            serializer.save(user=request.user, lat=lat, lng=lng)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':

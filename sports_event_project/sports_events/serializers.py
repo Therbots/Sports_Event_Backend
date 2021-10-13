@@ -4,7 +4,7 @@ from .models import Sports_event
 class Sports_eventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sports_event
-        fields = ['id', 'user_id', 'sport', 'date_time', 'location', 'number_of_players', 'skill_level', 'competitiveness_level']
+        fields = ['id', 'user_id', 'sport', 'date_time', 'location', 'number_of_players', 'skill_level', 'competitiveness_level', 'lat', 'lng']
 
         def create(self, validated_data):
             return Sports_event.objects.create(**validated_data)
