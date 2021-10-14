@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 class SportList(APIView):
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self,request):
         sports = Sport.objects.all()

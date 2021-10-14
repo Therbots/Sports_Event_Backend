@@ -11,8 +11,8 @@ class Sports_event(models.Model):
     number_of_players = models.IntegerField()
     skill_level = models.CharField(max_length=100)
     competitiveness_level = models.CharField(max_length=100)
-    lat = models.IntegerField(blank=True, null=True)
-    lng = models.IntegerField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lng = models.FloatField(blank=True, null=True)
 
 
 # Create your models here.
