@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
-def upload_path(instance, filename):
-    return '/'.join(['images', str(instance.name), filename])
+def upload_to(instance, filename):
+    return 'posts/{filename}'.format(filename=filename)
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
-    image = models.ImageField(blank=True, null=True, upload_to=upload_path)
+    image = models.ImageField(_("Image"), upload_to=upload_to, )
     street = models.CharField(max_length=150)
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=100)

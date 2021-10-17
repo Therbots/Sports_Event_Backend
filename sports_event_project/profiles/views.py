@@ -2,11 +2,12 @@ from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from .models import Profile
 from .serializers import ProfileSerializer
 from django.contrib.auth.models import User
 import requests
+from rest_framework.parsers import MultiPartParser, FormParser
 
 # class LocationList(APIView):
 
@@ -26,8 +27,10 @@ import requests
 
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
-def user_profile(request):
+@parser_classes([MultiPartParser, FormParser])
+def user_profile(request, format=None):
     if request.method == 'POST':
+        print(request.data)
         serializer = ProfileSerializer(data=request.data)
         street = request.data["street"]
         city = request.data["city"]
