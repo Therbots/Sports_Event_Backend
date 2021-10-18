@@ -4,7 +4,7 @@ from sports.models import Sport
 
 class Favorite_sport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
+    sport = models.ForeignKey(Sport, related_name="favorite_sports", on_delete=models.CASCADE)
     
 
 # Create your models here.

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Sports_event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
+    sport = models.ForeignKey(Sport, related_name="sports_events", on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     date_time = models.DateTimeField()
     location = models.CharField(max_length=200)
