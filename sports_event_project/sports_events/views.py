@@ -8,7 +8,7 @@ from .serializers import Sports_eventSerializer
 from django.contrib.auth.models import User
 import requests
 
-# class Sports_eventList(APIView):
+
 
 #     permission_classes = [IsAuthenticated]
 
@@ -53,4 +53,15 @@ def user_sports_events(request):
         sports_event = Sports_event.objects.filter(user_id=request.user.id)
         serializer = Sports_eventSerializer(sports_event, many=True)
         return Response(serializer.data)
+
+class Sports_eventList(APIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Sports_event.objects.all()
+    serializer_class = Sports_eventSerializer
+
+    def get_queryset(self):
+        return self.queryset.annotate(
+            sport_name = 'sport__name'
+        )
+
 # Create your views here.

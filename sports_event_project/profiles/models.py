@@ -8,7 +8,7 @@ def upload_to(instance, filename):
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
-    image = models.ImageField(_("Image"), upload_to=upload_to, )
+    image = models.ImageField(_("Image"), upload_to=upload_to, default='posts/default.jpg')
     street = models.CharField(max_length=150)
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=100)

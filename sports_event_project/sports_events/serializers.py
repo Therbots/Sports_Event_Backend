@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from .models import Sports_event
+from sports.serializers import SportSerializer
 
 class Sports_eventSerializer(serializers.ModelSerializer):
+    sport = SportSerializer()
     class Meta:
         model = Sports_event
-        fields = ['id', 'user_id', 'sport', 'name', 'date_time', 'location', 'number_of_players', 'skill_level', 'competitiveness_level', 'lat', 'lng']
+        fields =  ['id', 'user_id', 'sport', 'name', 'date_time', 'location', 'number_of_players', 'skill_level', 'competitiveness_level', 'lat', 'lng']
+
 
         def create(self, validated_data):
             return Sports_event.objects.create(**validated_data)
