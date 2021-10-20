@@ -3,7 +3,6 @@ from .models import Sports_event
 from sports.serializers import SportSerializer
 
 class Sports_eventSerializer(serializers.ModelSerializer):
-    sport = SportSerializer()
     class Meta:
         model = Sports_event
         fields =  ['id', 'user_id', 'sport', 'name', 'date_time', 'location', 'number_of_players', 'skill_level', 'competitiveness_level', 'lat', 'lng']
@@ -21,3 +20,10 @@ class Sports_eventSerializer(serializers.ModelSerializer):
             instance.competitiveness_level = validated_data.get('competitiveness_level', instance.competitiveness_level)
             instance.save()
             return instance
+
+
+class Sports_eventsSerializer(serializers.ModelSerializer):
+    sport = SportSerializer()
+    class Meta:
+        model = Sports_event
+        fields =  ['id', 'user_id', 'sport', 'name', 'date_time', 'location', 'number_of_players', 'skill_level', 'competitiveness_level', 'lat', 'lng']

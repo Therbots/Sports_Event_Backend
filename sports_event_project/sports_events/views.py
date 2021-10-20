@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import Sports_event
-from .serializers import Sports_eventSerializer
+from .serializers import Sports_eventSerializer, Sports_eventsSerializer
 from django.contrib.auth.models import User
 import requests
 
@@ -28,7 +28,7 @@ import requests
 @permission_classes([AllowAny])
 def get_all_events(request):
     sports_event = Sports_event.objects.all()
-    serializer = Sports_eventSerializer(sports_event, many=True)
+    serializer = Sports_eventsSerializer(sports_event, many=True)
     return Response(serializer.data)
 
 @api_view(['POST', 'GET'])
@@ -51,17 +51,9 @@ def user_sports_events(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
         sports_event = Sports_event.objects.filter(user_id=request.user.id)
-        serializer = Sports_eventSerializer(sports_event, many=True)
+        serializer = Sports_eventsSerializer(sports_event, many=True)
         return Response(serializer.data)
 
-class Sports_eventList(APIView):
-    permission_classes = [IsAuthenticated]
-    queryset = Sports_event.objects.all()
-    serializer_class = Sports_eventSerializer
 
-    def get_queryset(self):
-        return self.queryset.annotate(
-            sport_name = 'sport__name'
-        )
 
 # Create your views here.
